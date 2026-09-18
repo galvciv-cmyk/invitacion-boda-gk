@@ -1,0 +1,850 @@
+/* ==========================================================================
+   ADAPTACIONES RESPONSIVAS TOTALES (100% RESPONSIVE & ADAPTIVE) - BODA G&K
+   Compatibilidad completa de precisión:
+   - Ultra-Wide y Pantallas 4K (1440px - 2560px+)
+   - Laptops y Escritorio Estándar (1025px - 1440px)
+   - Tabletas en Horizontal y Vertical (768px - 1024px)
+   - Móviles Estándar y Grandes (376px - 767px: iPhone 13/14/15/16 Pro Max, Galaxy S+)
+   - Móviles Ultra-Compactos (320px - 375px: iPhone SE, Galaxy Z Fold cubierta)
+   - Modo Horizontal en Móviles (@media max-height / landscape)
+   - Soporte para Safe Area Insets (Notch / Dynamic Island / Barra de navegación iOS)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   SOPORTE DE SAFE AREA INSETS GLOBAL
+   -------------------------------------------------------------------------- */
+:root {
+    --sat: env(safe-area-inset-top, 0px);
+    --sar: env(safe-area-inset-right, 0px);
+    --sab: env(safe-area-inset-bottom, 0px);
+    --sal: env(safe-area-inset-left, 0px);
+}
+
+/* --------------------------------------------------------------------------
+   PANTALLAS GRANDES Y ULTRA-WIDE (min-width: 1400px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 1400px) {
+    .hero-content {
+        max-width: 1360px;
+    }
+
+    .royal-video-frame {
+        max-width: 1240px;
+    }
+
+    .video-container {
+        max-height: 720px;
+    }
+
+    .section-container {
+        max-width: 1200px;
+    }
+
+    .timeline-royal-vertical {
+        max-width: 1100px;
+    }
+
+    .parchment-scroll-card {
+        max-width: 1100px;
+        padding: 70px 60px;
+    }
+
+    .rsvp-formal-envelope {
+        max-width: 860px;
+        padding: 60px 50px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   PORTÁTILES Y TABLETAS EN MODO HORIZONTAL (max-width: 1024px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+    .portal-doors-container {
+        width: min(94vw, 840px);
+        height: min(84vh, 720px);
+        height: min(84dvh, 720px);
+    }
+
+    .history-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .history-portrait-gallery {
+        order: -1;
+    }
+
+    .portrait-oval-frame {
+        max-width: 320px;
+    }
+
+    .event-info-columns {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+    }
+
+    .practical-cards-grid {
+        grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr));
+        gap: 20px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   TABLETAS EN MODO VERTICAL Y MÓVILES GRANDES (max-width: 860px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 860px) {
+    /* Ajustes generales de sección */
+    .royal-section {
+        padding: 65px 16px;
+    }
+
+    .section-header {
+        margin-bottom: 36px;
+    }
+
+    .section-title {
+        font-size: clamp(1.8rem, 5vw, 2.5rem);
+    }
+
+    .section-subtitle {
+        font-size: clamp(1.3rem, 3.5vw, 1.8rem);
+    }
+
+    /* Momento 2: Ajuste Orgánico y Proporcional (Elimina Vacíos Innecesarios) */
+    .hero-sanctuary {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: calc(64px + var(--sat)) 16px calc(28px + var(--sab));
+        box-sizing: border-box;
+    }
+
+    .hero-content {
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        gap: 16px;
+    }
+
+    .hero-header-block {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .royal-video-frame {
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+    }
+
+    .scroll-royal-cue {
+        margin-top: 8px;
+        margin-bottom: 0;
+        padding-top: 4px;
+    }
+
+    /* Línea de tiempo vertical en una sola columna fluida a la izquierda */
+    .timeline-royal-vertical {
+        padding: 20px 0 !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow: hidden !important;
+    }
+
+    .timeline-royal-vertical::before {
+        left: 21px !important;
+        transform: none !important;
+        width: 2px !important;
+    }
+
+    .timeline-event-row {
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: flex-start !important;
+        gap: 16px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 32px !important;
+        width: 100% !important;
+        position: relative !important;
+    }
+
+    .timeline-node-pin {
+        position: relative !important;
+        left: 0 !important;
+        right: auto !important;
+        top: 6px !important;
+        transform: none !important;
+        width: 42px !important;
+        height: 42px !important;
+        min-width: 42px !important;
+        flex-shrink: 0 !important;
+        z-index: 2 !important;
+    }
+
+    .timeline-node-pin svg {
+        width: 20px !important;
+        height: 20px !important;
+    }
+
+    .timeline-card {
+        flex: 1 1 0% !important;
+        width: auto !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        padding: 20px 16px !important;
+        margin: 0 !important;
+        box-sizing: border-box !important;
+    }
+
+    /* Pergamino de Detalles */
+    .parchment-scroll-card {
+        padding: 40px 20px;
+    }
+
+    .parchment-inner-border {
+        inset: 10px;
+    }
+
+    /* Mapa y acciones */
+    .venue-map-img,
+    .venue-live-map-frame {
+        height: 360px;
+    }
+
+    .venue-map-bar {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 16px;
+    }
+
+    .venue-actions-group {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .btn-royal-action {
+        width: 100%;
+        justify-content: center;
+        padding: 12px 20px;
+    }
+
+    .map-view-switcher {
+        flex-direction: column;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .btn-map-tab {
+        width: 100%;
+        text-align: center;
+        padding: 10px 16px;
+        justify-content: center;
+    }
+
+    /* Formulario de RSVP */
+    .rsvp-formal-envelope {
+        padding: 38px 20px;
+    }
+
+    .rsvp-formal-envelope::before {
+        inset: 8px;
+    }
+
+    .rsvp-attendance-options {
+        grid-template-columns: 1fr;
+    }
+
+    .guestbook-form {
+        flex-direction: column;
+    }
+
+    .guestbook-input {
+        width: 100%;
+        max-width: 100% !important;
+    }
+
+    .guestbook-submit-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   MÓVILES ESTÁNDAR Y MODERNOS (max-width: 600px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+    /* Controles flotantes superiores adaptados con soporte para Notch / Dynamic Island */
+    .floating-royal-controls {
+        top: calc(10px + var(--sat));
+        right: calc(10px + var(--sar));
+        gap: 6px;
+    }
+
+    .royal-btn-spotify {
+        height: 38px;
+        padding: 0 10px;
+        font-size: 0.7rem;
+        gap: 5px;
+    }
+
+    .royal-btn-spotify svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .royal-btn-circle {
+        width: 38px;
+        height: 38px;
+    }
+
+    .royal-btn-circle svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    /* Momento 1: Portal Imperial Adaptativo */
+    .portal-doors-container {
+        width: 95vw;
+        height: 74vh;
+        height: 74dvh;
+        min-height: 420px;
+        border-radius: 90px 90px 0 0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.9), 0 0 0 2px var(--gold-pure);
+    }
+
+    .door-leaf-left .door-front {
+        border-radius: 90px 0 0 0;
+    }
+
+    .door-leaf-right .door-front {
+        border-radius: 0 90px 0 0;
+    }
+
+    .door-leaf-left .door-back {
+        border-radius: 0 90px 0 0;
+    }
+
+    .door-leaf-right .door-back {
+        border-radius: 90px 0 0 0;
+    }
+
+    .door-thickness {
+        width: 16px;
+    }
+
+    .door-leaf-left .door-thickness-right {
+        right: -8px;
+    }
+
+    .door-leaf-right .door-thickness-left {
+        left: -8px;
+    }
+
+    .door-leaf-left .door-front,
+    .door-leaf-right .door-front {
+        transform: translateZ(8px);
+    }
+
+    .door-leaf-left .door-back,
+    .door-leaf-right .door-back {
+        transform: rotateY(180deg) translateZ(8px);
+    }
+
+    .royal-medallion {
+        width: clamp(140px, 44vw, 185px);
+        height: clamp(140px, 44vw, 185px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.9), 0 0 25px rgba(212, 175, 55, 0.5);
+    }
+
+    .medallion-prompt {
+        font-size: 0.58rem;
+        letter-spacing: 2px;
+        padding: 3px 10px;
+        bottom: -22px;
+    }
+
+    .portal-welcome-text {
+        bottom: calc(14px + var(--sab));
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+    }
+
+    .portal-welcome-text span {
+        font-size: 1.35rem;
+    }
+
+    /* Momento 2: Salón y Video de la Historia (Ajuste Perfecto Sin Vacíos) */
+    .hero-sanctuary {
+        min-height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        padding: calc(52px + var(--sat)) 12px calc(24px + var(--sab));
+        box-sizing: border-box;
+    }
+
+    .hero-content {
+        flex: 0 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        height: auto;
+        max-width: 100%;
+        gap: 12px;
+    }
+
+    .hero-header-block {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    .royal-heading-pre {
+        font-size: 0.72rem;
+        letter-spacing: 3px;
+        margin-bottom: 4px;
+    }
+
+    .royal-heading-names {
+        font-size: clamp(1.85rem, 7.2vw, 2.6rem);
+        line-height: 1.15;
+        margin-bottom: 2px;
+    }
+
+    .royal-heading-subtitle {
+        font-size: clamp(1.12rem, 4vw, 1.45rem);
+        margin-bottom: 4px;
+    }
+
+    .royal-video-frame {
+        width: 100%;
+        max-width: 100%;
+        padding: 6px;
+        border-radius: 12px;
+        margin: 0 auto;
+    }
+
+    .royal-video-frame::before {
+        transform: translateX(-50%) scale(0.6);
+        top: -16px;
+    }
+
+    .video-container {
+        width: 100%;
+        aspect-ratio: 16 / 9;
+        max-height: none;
+        border-radius: 8px;
+    }
+
+    .play-gold-circle {
+        width: 54px;
+        height: 54px;
+    }
+
+    .play-gold-circle svg {
+        width: 22px;
+        height: 22px;
+        margin-left: 2px;
+    }
+
+    .play-label {
+        font-size: 0.68rem;
+        letter-spacing: 1.5px;
+    }
+
+    .scroll-royal-cue {
+        margin-top: 6px;
+        margin-bottom: 0;
+        padding-top: 4px;
+    }
+
+    .scroll-cue-text {
+        font-size: 0.72rem;
+        letter-spacing: 3px;
+        margin-bottom: 4px;
+    }
+
+    .scroll-cue-arrow {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Contador Regresivo en Móvil: Cuadrícula de 4 Columnas Proporcional */
+    .countdown-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 6px;
+        max-width: 360px;
+        margin: 0 auto;
+        padding: 0 4px;
+    }
+
+    .countdown-dial {
+        width: 100%;
+        height: 72px;
+        padding: 4px 2px;
+    }
+
+    .countdown-number {
+        font-size: 1.5rem;
+        line-height: 1.1;
+    }
+
+    .countdown-label {
+        font-size: 0.54rem;
+        letter-spacing: 1px;
+    }
+
+    /* Menú del Banquete en columna */
+    .banquet-menu-cards {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .menu-choice-item {
+        padding: 12px;
+    }
+
+    /* Entradas del Formulario con tamaño mínimo 16px (evita auto-zoom de iOS Safari) */
+    .form-input-royal {
+        font-size: 16px !important;
+        padding: 12px 14px;
+    }
+
+    /* Botón Sello de Lacre Real */
+    .wax-seal-real-container {
+        width: 98px;
+        height: 98px;
+    }
+
+    .wax-seal-label-below {
+        font-size: 0.72rem;
+        letter-spacing: 2px;
+    }
+
+    /* Vitrina de Mesa de Regalos en Móvil */
+    .gift-registry-wrapper {
+        flex-direction: column;
+        text-align: center;
+        gap: 14px;
+        padding: 16px 12px;
+    }
+
+    .gift-btn-container {
+        align-items: center;
+        width: 100%;
+    }
+
+    .btn-gift-gold {
+        width: 100%;
+    }
+
+    .gift-qr-inner {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Notas Prácticas: Aviso de Lluvia de Sobres en Efectivo */
+    .cash-envelope-box {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+        padding: 14px 12px;
+    }
+
+    .cash-envelope-details {
+        text-align: center;
+    }
+
+    /* Hashtag y Despedida */
+    .hashtag-card-royal {
+        padding: 24px 16px;
+    }
+
+    .hashtag-display {
+        font-size: clamp(1.8rem, 6vw, 2.5rem);
+    }
+
+    .closing-poem {
+        font-size: 1.1rem;
+        padding: 0 10px;
+    }
+
+    .closing-names-handwritten {
+        font-size: 2.4rem;
+    }
+
+    /* Modal Ceremonial de Confirmación */
+    .royal-modal-card {
+        padding: 30px 18px;
+        max-height: 90vh;
+        max-height: 90dvh;
+        overflow-y: auto;
+    }
+
+    .modal-royal-title {
+        font-size: 1.45rem;
+    }
+
+    .modal-royal-text {
+        font-size: 1.05rem;
+    }
+
+    .modal-real-seal-img {
+        width: 76px;
+        height: 76px;
+    }
+
+    .modal-actions {
+        gap: 8px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   MÓVILES ULTRA-COMPACTOS (iPhone SE, Pantallas <= 375px)
+   -------------------------------------------------------------------------- */
+@media (max-width: 375px) {
+    /* Spotify colapsa a icono elegante para no saturar cabecera */
+    .royal-btn-spotify span {
+        display: none;
+    }
+
+    .royal-btn-spotify {
+        width: 38px;
+        padding: 0;
+        justify-content: center;
+        border-radius: 50%;
+    }
+
+    .countdown-grid {
+        gap: 4px;
+    }
+
+    .countdown-dial {
+        height: 66px;
+    }
+
+    .countdown-number {
+        font-size: 1.3rem;
+    }
+
+    .countdown-label {
+        font-size: 0.5rem;
+        letter-spacing: 0.5px;
+    }
+
+    .hero-sanctuary {
+        padding: calc(48px + var(--sat)) 8px calc(20px + var(--sab));
+    }
+
+    .royal-heading-names {
+        font-size: 1.7rem;
+    }
+
+    .royal-heading-subtitle {
+        font-size: 1.05rem;
+        margin-bottom: 2px;
+    }
+
+    .portal-doors-container {
+        height: 70vh;
+        height: 70dvh;
+        min-height: 380px;
+        border-radius: 70px 70px 0 0;
+    }
+
+    .portal-interior-chamber {
+        border-radius: 70px 70px 0 0;
+    }
+
+    .door-leaf-left .door-front {
+        border-radius: 70px 0 0 0;
+    }
+
+    .door-leaf-right .door-front {
+        border-radius: 0 70px 0 0;
+    }
+
+    .door-leaf-left .door-back {
+        border-radius: 0 70px 0 0;
+    }
+
+    .door-leaf-right .door-back {
+        border-radius: 70px 0 0 0;
+    }
+
+    .royal-medallion {
+        width: 135px;
+        height: 135px;
+    }
+
+    .wax-seal-real-container {
+        width: 88px;
+        height: 88px;
+    }
+
+    .section-title {
+        font-size: 1.65rem;
+    }
+
+    .timeline-royal-vertical::before {
+        left: 17px !important;
+    }
+
+    .timeline-event-row {
+        gap: 10px !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+
+    .timeline-node-pin {
+        left: 0 !important;
+        top: 4px !important;
+        width: 34px !important;
+        height: 34px !important;
+        min-width: 34px !important;
+    }
+
+    .timeline-node-pin svg {
+        width: 16px !important;
+        height: 16px !important;
+    }
+
+    .timeline-card {
+        padding: 16px 12px !important;
+    }
+
+    .timeline-title {
+        font-size: 1.25rem !important;
+    }
+
+    .timeline-time-badge {
+        font-size: 0.75rem !important;
+        padding: 3px 8px !important;
+    }
+
+    .timeline-desc {
+        font-size: 0.95rem !important;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   DISPOSITIVOS EN ORIENTACIÓN HORIZONTAL / PANTALLAS DE ALTURA REDUCIDA
+   (Smartphones en horizontal, pantallas de poca altura <= 520px)
+   -------------------------------------------------------------------------- */
+@media (max-height: 520px) and (orientation: landscape) {
+    .portal-doors-container {
+        height: 85vh;
+        height: 85dvh;
+        min-height: 240px;
+        max-width: 520px;
+        border-radius: 60px 60px 0 0;
+    }
+
+    .door-leaf-left {
+        border-radius: 60px 0 0 0;
+    }
+
+    .door-leaf-right {
+        border-radius: 0 60px 0 0;
+    }
+
+    .royal-medallion {
+        width: 110px;
+        height: 110px;
+    }
+
+    .medallion-prompt {
+        bottom: -18px;
+        font-size: 0.5rem;
+        padding: 2px 8px;
+    }
+
+    .portal-welcome-text {
+        bottom: 8px;
+        font-size: 0.65rem;
+    }
+
+    .portal-welcome-text span {
+        font-size: 1.1rem;
+    }
+
+    .hero-sanctuary {
+        padding: 60px 16px 30px;
+    }
+
+    .video-container {
+        max-height: 70vh;
+    }
+
+    .royal-modal-card {
+        max-height: 88vh;
+        max-height: 88dvh;
+        padding: 20px 16px;
+    }
+
+    .modal-real-seal-img {
+        width: 55px;
+        height: 55px;
+        margin-bottom: 8px;
+    }
+
+    .modal-royal-title {
+        font-size: 1.3rem;
+        margin-bottom: 6px;
+    }
+
+    .modal-royal-text {
+        font-size: 0.95rem;
+        margin-bottom: 14px;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   ACCESIBILIDAD Y PREFERENCIA DE MOVIMIENTO REDUCIDO
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .royal-medallion {
+        animation: none;
+    }
+
+    .medallion-halo-ring {
+        animation: none;
+    }
+}
+
+/* --------------------------------------------------------------------------
+   PREVENCIÓN DE DESBORDAMIENTO HORIZONTAL GLOBAL & FLUIDEZ MULTIMEDIA
+   -------------------------------------------------------------------------- */
+img, video, iframe, canvas {
+    max-width: 100%;
+    height: auto;
+}
+
+video {
+    display: block;
+}
+
+/* Manejo seguro de texto y desbordes */
+h1, h2, h3, h4, p, span, a, label {
+    overflow-wrap: break-word;
+    hyphens: auto;
+}

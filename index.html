@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boda Real Gustavo & Kamilah | Invitación Imperial Estilo Luis XV</title>
+    <meta name="description" content="Invitación digital interactiva a la boda de Gustavo & Kamilah. Una experiencia inmersiva en los salones de Versalles con música de época, pergamino ceremonial y RSVP.">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👑</text></svg>">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/responsive.css">
+</head>
+<body>
+
+    <!-- Audio Stream de la Banda Sonora (Bridgerton - Thomas Beckman / Spotify) -->
+    <audio id="royal-audio-stream" src="https://p.scdn.co/mp3-preview/72d97c49dacd85eadb829d17d41977c29354ed11" preload="auto"></audio>
+
+    <!-- Canvas para lluvia sutil de pétalos de rosa y polvo de oro -->
+    <canvas id="particles-canvas"></canvas>
+
+    <!-- Controles Flotantes Superiores (Esquina Superior Derecha: Spotify, Pausar Música y Pétalos) -->
+    <div class="floating-royal-controls">
+        <a href="https://open.spotify.com/intl-es/track/5d7CEUgQKkOGEv0idSfZWH?si=79ff067367824d71" target="_blank" rel="noopener" class="royal-btn-spotify" title="Escuchar banda sonora oficial en Spotify">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm4.586 14.424c-.18.295-.563.387-.857.207-2.35-1.435-5.308-1.76-8.793-.963-.335.077-.67-.133-.746-.468-.077-.334.132-.67.467-.746 3.808-.87 7.076-.496 9.722 1.115.294.18.386.562.207.855zm1.223-2.723c-.226.367-.706.482-1.072.257-2.69-1.654-6.79-2.134-9.97-1.168-.413.125-.85-.107-.975-.52-.125-.413.107-.85.52-.975 3.632-1.102 8.147-.568 11.24 1.334.366.226.482.706.257 1.072zm.105-2.835C14.692 8.95 9.375 8.775 6.297 9.71c-.494.15-1.018-.128-1.168-.622-.15-.494.128-1.018.622-1.168 3.532-1.072 9.404-.866 13.115 1.338.445.264.59.838.327 1.282-.264.444-.838.59-1.28.328z"/></svg>
+            <span>Spotify</span>
+        </a>
+        <button id="btn-toggle-music" class="royal-btn-circle" title="Pausar / Reproducir Música (Bridgerton)" aria-label="Música Real">
+            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+        </button>
+        <button id="btn-toggle-petals" class="royal-btn-circle" title="Alternar Pétalos de Rosa" aria-label="Pétalos">
+            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+        </button>
+    </div>
+
+    <!-- ====================================================================
+         MOMENTO 1: EL PORTAL IMPERIAL (Fachada del Palacio de Versalles)
+         ==================================================================== -->
+    <div id="portal-stage" class="portal-stage" role="region" aria-label="Portal de Entrada al Palacio">
+        <div class="portal-frame-background"></div>
+        <div class="portal-overlay-vignette"></div>
+
+        <div class="portal-doors-container">
+            <!-- Hoja Izquierda de la Puerta (3D con volumen físico y textura idéntica) -->
+            <div class="door-leaf door-leaf-left" id="door-left">
+                <!-- Cara Exterior de la Puerta -->
+                <div class="door-face door-front">
+                    <div class="door-front-relief"></div>
+                    <div class="door-shade-overlay"></div>
+                </div>
+
+                <!-- Canto / Grosor 3D de la Puerta -->
+                <div class="door-thickness door-thickness-right"></div>
+
+                <!-- Cara Interior de la Puerta (Misma textura idéntica de palacio tallada) -->
+                <div class="door-face door-back">
+                    <div class="door-back-relief"></div>
+                </div>
+            </div>
+
+            <!-- Hoja Derecha de la Puerta (3D con volumen físico y textura idéntica) -->
+            <div class="door-leaf door-leaf-right" id="door-right">
+                <!-- Cara Exterior de la Puerta -->
+                <div class="door-face door-front">
+                    <div class="door-front-relief"></div>
+                    <div class="door-shade-overlay"></div>
+                </div>
+
+                <!-- Canto / Grosor 3D de la Puerta -->
+                <div class="door-thickness door-thickness-left"></div>
+
+                <!-- Cara Interior de la Puerta (Misma textura idéntica de palacio tallada) -->
+                <div class="door-face door-back">
+                    <div class="door-back-relief"></div>
+                </div>
+            </div>
+
+            <!-- Resplandor Dorado que brota del interior -->
+            <div class="portal-light-burst"></div>
+
+            <!-- Medallón Central G&K (Sello Húmedo Oficial de Gustavo & Kamilah) -->
+            <div class="portal-crest-anchor" id="portal-medallion-btn" role="button" tabindex="0" aria-label="Abrir las puertas de la celebración de Gustavo & Kamilah">
+                <div class="royal-medallion">
+                    <div class="medallion-halo-ring"></div>
+                    <!-- Sello Real Inmediato (Carga instantánea a 0ms sin depender de la red) -->
+                    <div class="medallion-inner-seal">
+                        <div class="medallion-crown-icon">👑</div>
+                        <div class="medallion-monogram">G &amp; K</div>
+                    </div>
+                    <img src="assets/images/sello-real-gk.png" alt="Sello Real Oficial Gustavo y Kamilah" class="real-seal-img" loading="eager" fetchpriority="high">
+                    <div class="medallion-prompt">Toca para Abrir</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="portal-welcome-text">
+            <span>Gustavo & Kamilah</span>
+            ENLACE NUPCIAL · ESTILO LUIS XV
+        </div>
+    </div>
+
+    <!-- ====================================================================
+         MOMENTO 2: LA REVELACIÓN & ESCENARIO DEL PALACIO
+         ==================================================================== -->
+    <main id="main-experience" class="main-experience">
+
+        <!-- Héroe Interior: Salón de los Espejos & Video Personal Panorámico -->
+        <section class="hero-sanctuary">
+            <div class="hero-content">
+                <div class="hero-header-block">
+                    <p class="royal-heading-pre">Por la Gracia del Amor Verdadero</p>
+                    <h1 class="royal-heading-names">Gustavo & Kamilah</h1>
+                    <p class="royal-heading-subtitle">Tienen el honor de invitarle a su Enlace Nupcial</p>
+                </div>
+
+                <!-- Marco Rococó de Oro con Video de Nuestra Historia (Gran Formato) -->
+                <div class="royal-video-frame">
+                    <div class="video-container" id="royal-video-container">
+                        <!-- Elemento de Video Real con la Portada Oficial de Gustavo & Kamilah -->
+                        <video id="royal-wedding-video" class="video-player-simulation" poster="assets/images/video-poster.png" playsinline preload="auto">
+                            <source src="assets/videos/wedding-story.mp4" type="video/mp4">
+                            <source src="assets/videos/our-story.mp4" type="video/mp4">
+                            <source src="assets/videos/video.mp4" type="video/mp4">
+                        </video>
+                        
+                        <div class="video-overlay-play-btn" id="video-play-overlay">
+                            <div class="play-gold-circle">
+                                <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                            </div>
+                            <span class="play-label">Nuestra Historia · Reproducir Video</span>
+                        </div>
+
+                        <div class="video-custom-controls">
+                            <button class="btn-ctrl" id="btn-play-pause" title="Reproducir / Pausar">
+                                <svg viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+                            </button>
+                            <div class="video-progress-bar" id="video-progress-bar">
+                                <div class="video-progress-fill" id="video-progress-fill"></div>
+                            </div>
+                            <span class="video-time-tag" id="video-time-tag">0:00 / 0:00</span>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#nuestra-historia" class="scroll-royal-cue">
+                    <span class="scroll-cue-text">Caminar por los Salones</span>
+                    <svg class="scroll-cue-arrow" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+                    </svg>
+                </a>
+            </div>
+        </section>
+
+        <!-- ================================================================
+             SECCIÓN 3: NUESTRA HISTORIA
+             ================================================================ -->
+        <section id="nuestra-historia" class="royal-section section-history">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-pre-title">Capítulo Primero</span>
+                    <h2 class="section-title">Nuestra Historia de Amor</h2>
+                    <p class="section-subtitle">Gustavo & Kamilah</p>
+                </div>
+
+                <div class="history-grid">
+                    <div class="history-narrative-card">
+                        <p class="history-text drop-cap">
+                            Hay encuentros que parecen haber sido escritos en los astros siglos antes de pronunciar la primera palabra. El viaje de Gustavo & Kamilah comenzó como una tarde serena bajo los laureles, donde una mirada bastó para comprender que la vida, a partir de ese instante, se escribiría al unísono.
+                        </p>
+                        <p class="history-text">
+                            Desde las risas compartidas en cada sendero hasta las promesas susurradas al atardecer frente al horizonte, cada instante nos ha guiado a este salón dorado. No celebramos solo un enlace, sino el testimonio eterno de dos almas que eligieron ser refugio, inspiración y cómplices para toda la vida.
+                        </p>
+                        <blockquote class="history-quote">
+                            "Amar no es mirarse el uno al otro; es mirar juntos en la misma dirección hacia la eternidad."
+                        </blockquote>
+                    </div>
+
+                    <div class="history-portrait-gallery">
+                        <div class="portrait-oval-frame">
+                            <img src="assets/images/couple-portrait.jpg" alt="Gustavo y Kamilah">
+                            <div class="portrait-crest-badge">GUSTAVO & KAMILAH · MMXXVI</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="rocaille-divider">
+            <svg class="rocaille-divider-icon" viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+        </div>
+
+        <!-- ================================================================
+             SECCIÓN 4: DETALLES DEL EVENTO (Pergamino Formal)
+             ================================================================ -->
+        <section id="detalles" class="royal-section section-details">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-pre-title">Convocatoria Real</span>
+                    <h2 class="section-title">Los Detalles del Enlace</h2>
+                    <p class="section-subtitle">Jueves, XI de Marzo del año MMXXVII</p>
+                </div>
+
+                <div class="parchment-scroll-card">
+                    <div class="parchment-inner-border"></div>
+
+                    <!-- Contador Regresivo Imperial -->
+                    <div class="countdown-clock-wrapper">
+                        <div class="countdown-title">Tiempo para Nuestro Gran Día</div>
+                        <div class="countdown-grid">
+                            <div class="countdown-dial">
+                                <span class="countdown-number" id="count-days">00</span>
+                                <span class="countdown-label">Días</span>
+                            </div>
+                            <div class="countdown-dial">
+                                <span class="countdown-number" id="count-hours">00</span>
+                                <span class="countdown-label">Horas</span>
+                            </div>
+                            <div class="countdown-dial">
+                                <span class="countdown-number" id="count-mins">00</span>
+                                <span class="countdown-label">Minutos</span>
+                            </div>
+                            <div class="countdown-dial">
+                                <span class="countdown-number" id="count-secs">00</span>
+                                <span class="countdown-label">Segundos</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Columnas de Información -->
+                    <div class="event-info-columns">
+                        <!-- Fecha y Hora -->
+                        <div class="info-item-block">
+                            <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M19 3h-1V1h-2v2H8V1H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V8h14v11zM7 10h5v5H7z"/></svg>
+                            <h3 class="info-item-title">Fecha & Hora</h3>
+                            <div class="info-item-roman">JUEVES · XI · III · MMXXVII</div>
+                            <p class="info-item-desc">
+                                Ceremonia Solemne a las <strong>16:00 Horas</strong>.<br>
+                                Se ruega puntualidad de corte.
+                            </p>
+                            <div class="calendar-actions-wrap">
+                                <button id="btn-calendar-google" class="btn-royal-action" title="Agregar a Google Calendar">
+                                    + Google Cal
+                                </button>
+                                <button id="btn-calendar-ics" class="btn-royal-action" title="Descargar archivo Apple / Outlook .ics">
+                                    Descargar .ICS
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Sede / Venue (CASA DE RETIRO SANTA MARÍA DE LOS ALTOS) -->
+                        <div class="info-item-block">
+                            <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/></svg>
+                            <h3 class="info-item-title">La Sede Nupcial</h3>
+                            <div class="info-item-roman">CASA DE RETIRO SANTA MARÍA DE LOS ALTOS</div>
+                            <p class="info-item-desc">
+                                Un enclave rodeado de serena naturaleza y amplios jardines.<br>
+                                Santa María de Los Altos, Miranda.
+                            </p>
+                            <div style="margin-top: 16px;">
+                                <a href="https://maps.app.goo.gl/oZcz7QiSqYajz8KaA" target="_blank" rel="noopener" style="font-size: 0.85rem; color: var(--gold-dark); font-family: var(--font-heading); text-decoration: underline;">Ver ubicación exacta en mapa</a>
+                            </div>
+                        </div>
+
+                        <!-- Código de Vestimenta -->
+                        <div class="info-item-block">
+                            <svg class="info-item-icon" viewBox="0 0 24 24"><path d="M9 13.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm6 0c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8 0-.29.02-.58.05-.86 2.36-1.05 4.23-2.98 5.21-5.37C11.07 8.33 14.05 10 17.42 10c.78 0 1.53-.09 2.25-.26.21.71.33 1.47.33 2.26 0 4.41-3.59 8-8 8z"/></svg>
+                            <h3 class="info-item-title">Código de Etiqueta</h3>
+                            <div class="info-item-roman">RIGUROSA · BLACK TIE / ROCOCÓ</div>
+                            <p class="info-item-desc">
+                                Damas: Vestido largo de gala en tonos joya, salvia o champaña.<br>
+                                Caballeros: Esmoquin clásico o traje de etiqueta con corbata de lazo.
+                            </p>
+                            <div class="dress-code-palette">
+                                <div class="palette-swatch" style="background-color: #173827;" data-title="Verde Esmeralda Bosque"></div>
+                                <div class="palette-swatch" style="background-color: #537562;" data-title="Verde Salvia Imperial"></div>
+                                <div class="palette-swatch" style="background-color: #e4d5bc;" data-title="Champaña Apergamina"></div>
+                                <div class="palette-swatch" style="background-color: #d4af37;" data-title="Acentos Pan de Oro"></div>
+                                <div class="palette-swatch" style="background-color: #111111;" data-title="Negro Riguroso"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Vitrina de Mapa de Santa María de Los Altos con Estilo Cartográfico Clásico -->
+                    <div class="map-view-switcher">
+                        <button id="tab-map-vintage" class="btn-map-tab active" type="button">
+                            📜 Grabado Cartográfico de la Finca
+                        </button>
+                        <button id="tab-map-live" class="btn-map-tab" type="button">
+                            🛰️ Vista Satelital & Rutas
+                        </button>
+                    </div>
+
+                    <div class="venue-map-showcase">
+                        <img id="venue-vintage-img" src="assets/images/estate-map.jpg" alt="Plan Général de Santa María de Los Altos · Grabado Cartográfico Siglo XVIII a partir de la vista satelital" class="venue-map-img" title="Toca para explorar los detalles del grabado">
+                        <iframe id="venue-live-frame" class="venue-live-map-frame" src="https://www.openstreetmap.org/export/embed.html?bbox=-66.948%2C10.376%2C-66.932%2C10.388&amp;layer=mapnik&amp;marker=10.3818345%2C-66.9404536" loading="lazy" title="Mapa Interactivo de Santa María de Los Altos"></iframe>
+                        
+                        <div class="venue-map-bar">
+                            <span class="venue-address-text">📍 Casa de Retiro Santa María de Los Altos · Acceso Principal</span>
+                            <div class="venue-actions-group">
+                                <a id="btn-nav-google" href="https://maps.app.goo.gl/oZcz7QiSqYajz8KaA" target="_blank" rel="noopener" class="btn-royal-action">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/></svg>
+                                    Abrir en Google Maps
+                                </a>
+                                <a id="btn-nav-waze" href="https://www.waze.com/ul?ll=10.3818345,-66.9404536&navigate=yes" target="_blank" rel="noopener" class="btn-royal-action">
+                                    <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V17a1 1 0 0 1-2 0v-.07A8 8 0 1 1 20 12a7.9 7.9 0 0 1-.93 3.73l-1.42-1.42A6 6 0 1 0 6 12a6 6 0 0 0 7 4.93z"/></svg>
+                                    Navegar con Waze
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="rocaille-divider">
+            <svg class="rocaille-divider-icon" viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+        </div>
+
+        <!-- ================================================================
+             SECCIÓN 5: ITINERARIO DEL DÍA
+             ================================================================ -->
+        <section id="itinerario" class="royal-section section-itinerary">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-pre-title">El Programa Solemne</span>
+                    <h2 class="section-title">Itinerario de la Jornada</h2>
+                    <p class="section-subtitle">Cada momento orquestado para ser inolvidable</p>
+                </div>
+
+                <div class="timeline-royal-vertical">
+                    <!-- Hito 1 -->
+                    <div class="timeline-event-row">
+                        <div class="timeline-node-pin">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/></svg>
+                        </div>
+                        <div class="timeline-card">
+                            <span class="timeline-time-badge">16:00 HORAS</span>
+                            <h3 class="timeline-title">La Solemne Ceremonia</h3>
+                            <p class="timeline-desc">
+                                El intercambio de votos bajo el arco floral en los jardines, acompañados por el tema de Bridgerton y cuarteto de cuerdas.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Hito 2 -->
+                    <div class="timeline-event-row">
+                        <div class="timeline-node-pin">
+                            <svg viewBox="0 0 24 24"><path d="M21 5V3H3v2l8 9v5H6v2h12v-2h-5v-5l8-9zM7.43 7L5.66 5h12.69l-1.78 2H7.43z"/></svg>
+                        </div>
+                        <div class="timeline-card">
+                            <span class="timeline-time-badge">17:30 HORAS</span>
+                            <h3 class="timeline-title">El Cóctel en los Jardines</h3>
+                            <p class="timeline-desc">
+                                Brindis con champaña y coctelería de autor, selección de canapés gourmet y melodías de época al aire libre.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Hito 3 -->
+                    <div class="timeline-event-row">
+                        <div class="timeline-node-pin">
+                            <svg viewBox="0 0 24 24"><path d="M11 9H9V2H7v7H5V2H3v7c0 2.12 1.66 3.84 3.75 3.97V22h2.5v-9.03C11.34 12.84 13 11.12 13 9V2h-2v7zm5-3v8h2.5v8H21V2c-2.76 0-5 2.24-5 4z"/></svg>
+                        </div>
+                        <div class="timeline-card">
+                            <span class="timeline-time-badge">19:30 HORAS</span>
+                            <h3 class="timeline-title">El Banquete Real</h3>
+                            <p class="timeline-desc">
+                                Entrada triunfal al Gran Salón bajo la luz de las arañas de cristal. Cena de alta cocina en tres tiempos y discursos de honor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Hito 4 -->
+                    <div class="timeline-event-row">
+                        <div class="timeline-node-pin">
+                            <svg viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
+                        </div>
+                        <div class="timeline-card">
+                            <span class="timeline-time-badge">21:30 HORAS</span>
+                            <h3 class="timeline-title">El Primer Vals & Gran Baile</h3>
+                            <p class="timeline-desc">
+                                Apertura de la pista con el vals nupcial de Gustavo & Kamilah, barra libre de coctelería, música festiva y celebración sin fin.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Hito 5 -->
+                    <div class="timeline-event-row">
+                        <div class="timeline-node-pin">
+                            <svg viewBox="0 0 24 24"><path d="M12 .587l3.668 7.431 8.2 1.192-5.934 5.784 1.399 8.165-7.333-3.856-7.333 3.856 1.399-8.165-5.934-5.784 8.2-1.192zm0 5.702l-2.072 4.197-4.632.673 3.352 3.267-.791 4.612 4.143-2.178 4.143 2.178-.791-4.612 3.352-3.267-4.632-.673z"/></svg>
+                        </div>
+                        <div class="timeline-card">
+                            <span class="timeline-time-badge">02:00 HORAS</span>
+                            <h3 class="timeline-title">Tornaboda & Delicias Nocturnas</h3>
+                            <p class="timeline-desc">
+                                Cierre de una noche dorada con fogatas, gastronomía reconfortante de medianoche y brindis de despedida.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="rocaille-divider">
+            <svg class="rocaille-divider-icon" viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+        </div>
+
+        <!-- ================================================================
+             SECCIÓN 6: RSVP CEREMONIAL
+             ================================================================ -->
+        <section id="rsvp" class="royal-section section-rsvp">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-pre-title">Respuesta de los Ilustres Invitados</span>
+                    <h2 class="section-title">Confirmación de Asistencia</h2>
+                    <p class="section-subtitle">Rogamos confirmar antes del 1 de Julio de 2026</p>
+                </div>
+
+                <div class="rsvp-formal-envelope">
+                    <form id="royal-rsvp-form">
+                        <!-- Nombre Completo -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal" for="guest-name">Nombre y Apellidos de los Asistentes *</label>
+                            <input type="text" id="guest-name" name="guestName" required class="form-input-royal" placeholder="Ej. Familia Rodríguez / Gustavo y Acompañante">
+                        </div>
+
+                        <!-- Asistencia -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal">¿Tendremos el honor de su presencia? *</label>
+                            <div class="rsvp-attendance-options">
+                                <label class="attendance-card-label">
+                                    <input type="radio" name="attendance" value="yes" checked required>
+                                    <span class="custom-radio-check"></span>
+                                    <span>Con honor confirmo mi asistencia</span>
+                                </label>
+                                <label class="attendance-card-label">
+                                    <input type="radio" name="attendance" value="no" required>
+                                    <span class="custom-radio-check"></span>
+                                    <span>Brindaré con vosotros en la distancia</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Número de Pases -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal" for="guest-count">Número de Invitados / Pases Confirmados</label>
+                            <select id="guest-count" name="guestCount" class="form-input-royal">
+                                <option value="1">1 Persona (Pase Individual)</option>
+                                <option value="2" selected>2 Personas (Pareja / Acompañante)</option>
+                                <option value="3">3 Personas</option>
+                                <option value="4">4 Personas (Familia)</option>
+                            </select>
+                        </div>
+
+                        <!-- Menú del Banquete Real -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal">Preferencia para el Banquete Real</label>
+                            <div class="banquet-menu-cards">
+                                <div class="menu-choice-item selected" data-value="Carne">
+                                    <input type="radio" name="banquetMenu" value="Solomillo Real" checked>
+                                    <div class="menu-choice-icon">🥩</div>
+                                    <div class="menu-choice-name">Solomillo de Ternera</div>
+                                    <div class="menu-choice-desc">Reducción de oporto, milhojas de patata y trufa.</div>
+                                </div>
+                                <div class="menu-choice-item" data-value="Pescado">
+                                    <input type="radio" name="banquetMenu" value="Lubina Imperial">
+                                    <div class="menu-choice-icon">🐟</div>
+                                    <div class="menu-choice-name">Lubina Salvaje</div>
+                                    <div class="menu-choice-desc">Con velouté de hinojo marino y azafrán real.</div>
+                                </div>
+                                <div class="menu-choice-item" data-value="Vegetariano">
+                                    <input type="radio" name="banquetMenu" value="Risotto Trufado">
+                                    <div class="menu-choice-icon">🍄</div>
+                                    <div class="menu-choice-name">Risotto Gourmet</div>
+                                    <div class="menu-choice-desc">Setas de temporada, espárragos y emulsión de trufa.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Restricciones Dietéticas -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal" for="dietary-req">Alergias o Restricciones Alimentarias</label>
+                            <input type="text" id="dietary-req" name="dietaryReq" class="form-input-royal" placeholder="Celíaco, vegetariano estricto, sin lactosa...">
+                        </div>
+
+                        <!-- Canción Favorita -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal" for="party-song">La canción que no puede faltar en el baile</label>
+                            <input type="text" id="party-song" name="partySong" class="form-input-royal" placeholder="Título de la canción y artista">
+                        </div>
+
+                        <!-- Dedicatoria -->
+                        <div class="form-group-royal">
+                            <label class="form-label-royal" for="blessing-msg">Unas palabras o bendición para Gustavo & Kamilah</label>
+                            <textarea id="blessing-msg" name="blessingMessage" rows="3" class="form-input-royal" placeholder="Escribe aquí tu dedicatoria para los novios..."></textarea>
+                        </div>
+
+                        <!-- Botón Sello de Lacre Real con el Sello Húmedo Oficial de Gustavo y Kamilah -->
+                        <div class="wax-seal-submit-wrapper">
+                            <button type="submit" id="btn-wax-seal" class="btn-wax-seal-submit" aria-label="Sellar confirmación de asistencia con el sello real">
+                                <div class="wax-seal-real-container">
+                                    <img src="assets/images/sello-real-gk.png" alt="Sello Real Oficial Gustavo y Kamilah" class="real-wax-seal-btn-img">
+                                </div>
+                                <span class="wax-seal-label-below">Estampar Sello Real de Confirmación</span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+
+        <div class="rocaille-divider">
+            <svg class="rocaille-divider-icon" viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+        </div>
+
+        <!-- ================================================================
+             SECCIÓN 7: INFORMACIÓN PRÁCTICA (Notas para Invitados)
+             ================================================================ -->
+        <section id="informacion" class="royal-section section-practical">
+            <div class="section-container">
+                <div class="section-header">
+                    <span class="section-pre-title">Guía de Cortesía</span>
+                    <h2 class="section-title">Notas para Nuestros Invitados</h2>
+                    <p class="section-subtitle">Todo lo necesario para su estancia y comodidad</p>
+                </div>
+
+                <div class="practical-cards-grid">
+                    <!-- Alojamiento -->
+                    <div class="practical-card">
+                        <svg class="card-rococo-icon" viewBox="0 0 24 24"><path d="M7 13c1.66 0 3-1.34 3-3S8.66 7 7 7s-3 1.34-3 3 1.34 3 3 3zm12-6h-8v7H3V5H1v15h2v-3h18v3h2v-9c0-2.21-1.79-4-4-4z"/></svg>
+                        <h3 class="card-title-royal">Alojamiento & Estancia</h3>
+                        <p class="card-body-text">
+                            Deseamos que este fin de semana sea una reunión cálida en comunidad. Hemos seleccionado opciones de hospedaje cercanas y en la misma finca para disfrutar juntos de esta gran fiesta.
+                        </p>
+                        <span style="font-family: var(--font-clean); font-size: 0.8rem; color: var(--gold-bright);">Tarifa especial mencionando #BodaGustavoyKamilah</span>
+                    </div>
+
+                    <!-- Transporte & Estacionamiento -->
+                    <div class="practical-card">
+                        <svg class="card-rococo-icon" viewBox="0 0 24 24"><path d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.04 3H5.81l1.04-3zM19 17H5v-4.66l.12-.34h13.77l.11.34V17z"/></svg>
+                        <h3 class="card-title-royal">Transporte & Estacionamiento</h3>
+                        <p class="card-body-text">
+                            La Casa de Retiro Santa María de Los Altos cuenta con área de estacionamiento vigilado para todos los invitados. Recomendamos llegar con anticipación para disfrutar del recibimiento imperial.
+                        </p>
+                        <span style="font-family: var(--font-clean); font-size: 0.8rem; color: var(--gold-bright);">Recepción vehicular desde las 15:15 hrs</span>
+                    </div>
+
+                    <!-- Mesa de Regalos & Reserva de Obsequios Oficial -->
+                    <div class="practical-card practical-card-gifts">
+                        <svg class="card-rococo-icon" viewBox="0 0 24 24"><path d="M20 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                        <h3 class="card-title-royal">Mesa de Regalos Oficial</h3>
+                        <p class="card-body-text">
+                            Vuestra compañía es el mayor tesoro que anhelamos. Si deseáis hacernos un obsequio, hemos creado nuestra <strong>Mesa de Regalos Virtual</strong> para que podáis elegir o reservar vuestra muestra de cariño:
+                        </p>
+
+                        <!-- Vitrina de Mesa de Regalos (Código QR + Botón de Acceso) -->
+                        <div class="gift-registry-wrapper">
+                            <a href="https://boda-kamiygus.netlify.app/" target="_blank" rel="noopener" class="gift-qr-container" title="Escanear o tocar para abrir la Mesa de Regalos">
+                                <div class="gift-qr-inner">
+                                    <img src="assets/images/qr-regalos.png" alt="Código QR Mesa de Regalos Boda Gustavo y Kamilah" class="gift-qr-img">
+                                </div>
+                                <span class="gift-qr-hint">Escanea con tu cámara</span>
+                            </a>
+
+                            <div class="gift-btn-container">
+                                <a href="https://boda-kamiygus.netlify.app/" target="_blank" rel="noopener" class="btn-royal-action btn-gift-gold">
+                                    <svg viewBox="0 0 24 24" style="width: 18px; height: 18px; fill: currentColor; margin-right: 4px;"><path d="M19 6h-2.18c.11-.31.18-.65.18-1 0-1.66-1.34-3-3-3-1.05 0-1.96.54-2.5 1.35l-.5.67-.5-.68C10.96 2.54 10.05 2 9 2 7.34 2 6 3.34 6 5c0 .35.07.69.18 1H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-5-2c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zM9 4c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm11 15H4v-2h16v2zm0-5H4V8h5.08L7 10.83 8.62 12 11 8.76l1-1.36 1 1.36L15.38 12 17 10.83 14.92 8H20v6z"/></svg>
+                                    <span>🎁 Ver Mesa de Regalos</span>
+                                </a>
+                                <span class="gift-domain-tag">boda-kamiygus.netlify.app</span>
+                            </div>
+                        </div>
+
+                        <!-- Lluvia de Sobres (Muestras de afecto en efectivo) -->
+                        <div class="cash-envelope-box">
+                            <div class="cash-icon-wrapper">
+                                <svg viewBox="0 0 24 24" class="cash-envelope-icon"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+                            </div>
+                            <div class="cash-envelope-details">
+                                <span class="cash-envelope-title">Lluvia de Sobres (Efectivo)</span>
+                                <p class="cash-envelope-sub">Si deseáis brindarnos un obsequio en efectivo, dispondremos de un cofre nupcial durante la recepción.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="rocaille-divider">
+            <svg class="rocaille-divider-icon" viewBox="0 0 24 24"><path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/></svg>
+        </div>
+
+        <!-- ================================================================
+             SECCIÓN 8: HASHTAG & CIERRE REAL
+             ================================================================ -->
+        <section id="cierre" class="section-hashtag-closing">
+            <div class="section-container">
+                
+                <!-- Hashtag Oficial -->
+                <div class="hashtag-card-royal">
+                    <p class="section-pre-title">Compartamos la Magia</p>
+                    <div class="hashtag-display">#BodaGustavoyKamilah</div>
+                    <p class="hashtag-instruction">
+                        Capturad los instantes de la velada y etiquetad vuestras memorias para que formen parte de nuestro álbum eterno.
+                    </p>
+                    <button id="btn-copy-hashtag" class="btn-royal-action">
+                        Copiar Hashtag
+                    </button>
+                </div>
+
+                <!-- Muro de Deseos (Guestbook) -->
+                <div class="guestbook-section">
+                    <h3 style="font-family: var(--font-royal); color: var(--gold-light); font-size: 1.6rem; text-align: center; margin-bottom: 20px;">
+                        Libro de Honor & Deseos
+                    </h3>
+
+                    <form id="guestbook-form" class="guestbook-form">
+                        <input type="text" id="guestbook-author" class="guestbook-input" placeholder="Vuestro Nombre..." style="max-width: 220px;" required>
+                        <input type="text" id="guestbook-input" class="guestbook-input" placeholder="Dejad vuestra dedicatoria o felicitación..." required>
+                        <button type="submit" class="btn-royal-action" style="white-space: nowrap;">Firmar Libro</button>
+                    </form>
+
+                    <div class="guestbook-messages-list" id="guestbook-list">
+                        <!-- Mensajes inyectados por JS -->
+                    </div>
+                </div>
+
+                <!-- Firmas y Despedida -->
+                <div class="closing-signatures">
+                    <p class="closing-poem">
+                        "El corazón no tiene épocas, pero cuando ama con devoción, convierte cualquier instante en un palacio eterno."
+                    </p>
+                    <img src="assets/images/sello-real-gk.png" alt="Sello Real Gustavo y Kamilah" style="width: 100px; height: 100px; margin: 0 auto 12px; display: block; object-fit: contain; filter: drop-shadow(0 4px 15px rgba(0,0,0,0.7));">
+                    <div class="closing-names-handwritten">Gustavo & Kamilah</div>
+                    <p style="font-family: var(--font-heading); letter-spacing: 4px; color: var(--gold-dark); font-size: 0.8rem; margin-top: 14px;">
+                        SANTA MARÍA DE LOS ALTOS · MMXXVII
+                    </p>
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- ====================================================================
+         MODAL CEREMONIAL DE ÉXITO (CONFIRMACIÓN RSVP)
+         ==================================================================== -->
+    <div id="rsvp-success-modal" class="royal-modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+        <div class="royal-modal-card">
+            <img src="assets/images/sello-real-gk.png" alt="Sello Real Aplicado" class="modal-real-seal-img">
+            <h3 id="modal-title" class="modal-royal-title">¡Sello Real Aplicado!</h3>
+            <p class="modal-royal-text">
+                Vuestra confirmación ha quedado debidamente asentada en los registros nupciales de <strong>Gustavo & Kamilah</strong>. Es un inmenso regocijo contar con vuestra compañía en esta celebración.
+            </p>
+            <div class="modal-actions">
+                <button id="btn-modal-whatsapp" class="btn-royal-action" style="background: #25d366; color: #fff; justify-content: center;">
+                    📲 Notificar a los Novios por WhatsApp
+                </button>
+                <a href="https://boda-kamiygus.netlify.app/" target="_blank" rel="noopener" class="btn-royal-action" style="justify-content: center; background: var(--gold-gradient); color: var(--green-darkest); font-weight: 700;">
+                    🎁 Mesa de Regalos
+                </a>
+                <button id="btn-modal-close" class="btn-royal-action" style="justify-content: center; background: transparent; color: var(--green-imperial); border-color: var(--green-imperial);">
+                    Regresar a la Invitación
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/audio-synth.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
