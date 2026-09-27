@@ -288,11 +288,11 @@ function initVideoPlayer() {
 }
 
 /* ==========================================================================
-   4. CONTADOR REGRESIVO DE ÉPOCA (11 DE MARZO DE 2027)
+   4. CONTADOR REGRESIVO DE ÉPOCA (30 DE ABRIL DE 2027)
    ========================================================================== */
 function initCountdown() {
-    // 11 de Marzo de 2027 a las 16:00 (Grabado oficial del sello)
-    const targetDate = new Date('2027-03-11T16:00:00').getTime();
+    // 30 de Abril de 2027 a las 16:00 (Grabado oficial del sello)
+    const targetDate = new Date('2027-04-30T16:00:00').getTime();
 
     const daysEl = document.getElementById('count-days');
     const hoursEl = document.getElementById('count-hours');
@@ -339,8 +339,8 @@ function initCalendarActions() {
         title: "Boda Real Gustavo & Kamilah",
         description: "Enlace matrimonial de Gustavo & Kamilah. Experiencia estilo Luis XV. Enlace de mapas: https://maps.app.goo.gl/oZcz7QiSqYajz8KaA",
         location: "Casa de Retiro Santa María de Los Altos",
-        start: "20270311T160000",
-        end: "20270312T040000"
+        start: "20270430T160000",
+        end: "20270501T040000"
     };
 
 
@@ -360,7 +360,7 @@ function initCalendarActions() {
                 "VERSION:2.0",
                 "PRODID:-//Boda Gustavo y Kamilah//ES",
                 "BEGIN:VEVENT",
-                `UID:boda-gustavo-kamilah-2026`,
+                `UID:boda-gustavo-kamilah-2027`,
                 `DTSTAMP:${eventDetails.start}Z`,
                 `DTSTART:${eventDetails.start}`,
                 `DTEND:${eventDetails.end}`,
